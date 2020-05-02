@@ -1,0 +1,16 @@
+SIZE = 400
+GRID_LEN = 4
+GRID_PADDING = 10
+
+BACKGROUND_COLOR_GAME = "#92877d"
+BACKGROUND_COLOR_CELL_EMPTY = "#9e948a"
+BACKGROUND_COLOR = "#eee4da"
+CELL_COLOR = "#776e65"
+
+FONT = ("Verdana", 40, "bold")
+
+KEY_UP = "'w'"
+KEY_DOWN = "'s'"
+KEY_LEFT = "'a'"
+KEY_RIGHT = "'d'"
+

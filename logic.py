@@ -1,7 +1,44 @@
-# Define a function which finds the location of 0 in an 4x4 array and returns it as a tuple (x,y) where the top
+import random
+
+
+def new_game(n):
+    # matrix = [[5, 2, 7, 3], [9, 1, 15, 4], [10, 6, 8, 12], [13, 11, 14, 0]]
+    matrix = []
+
+    numbers = [x for x in range(n*n)]
+    random.shuffle(numbers)
+
+    for i in range(n):
+        row = []
+        for j in range(n):
+            row.append(numbers.pop())
+        matrix.append(row)
+    return matrix
+
+
+# Check whether the correct order of numbers has been reached
+def game_state(mat, n):
+
+    solution = []
+
+    for i in range(n):
+        row = []
+        for j in range(n):
+            row.append(i*n+j+1)
+        solution.append(row)
+    solution[n-1][n-1] = 0
+
+    if mat == solution:
+        return 'win'
+    return 'not over'
+
+
+# Define a function which finds the location of 0 in a 4x4 array and returns it as a tuple (x,y) where the top
 # left corner is (0,0).
+
+
 def find_zero(array):
-    location = (0,0)
+    location = (0, 0)
     y = 0
     for row in array:
         if row.count(0) == 1:
@@ -10,17 +47,13 @@ def find_zero(array):
             y += 1
     return location
 
+
 # Now define the functions which allow the 0 tile, representing the blank tile from the puzzle,
 # to move up, down, left and right.
-
-def move_up(array):
-    # If the 0 is in the top row return an error code
-    x, y = find_zero(array)
-    if y == 0:
-        return 1
-
+def up(array):
     # If the 0 is not in the top row swap the 0 with the number above it.
-    else:
+    x, y = find_zero(array)
+    if y != 0:
         # Find the number to swap with
         number_to_swap = array[y-1][x]
         # Set the 0 to the new number
@@ -30,14 +63,11 @@ def move_up(array):
 
     return array
 
-def move_down(array):
+
+def down(array):
     # If the 0 is in the bottom row return an error code
     x, y = find_zero(array)
-    if y == 3:
-        return 1
-
-    # If the 0 is not in the bottom row swap the 0 with the number below it.
-    else:
+    if y != len(array) - 1:
         # Find the number to swap with
         number_to_swap = array[y+1][x]
         # Set the 0 to the new number
@@ -47,14 +77,11 @@ def move_down(array):
 
     return array
 
-def move_left(array):
+
+def left(array):
     # If the 0 is in the left column return an error code
     x, y = find_zero(array)
-    if x == 0:
-        return 1
-
-    # If the 0 is not in the left column swap the 0 with the number to the left of it.
-    else:
+    if x != 0:
         # Find the number to swap with
         number_to_swap = array[y][x-1]
         # Set the 0 to the new number
@@ -64,14 +91,11 @@ def move_left(array):
 
     return array
 
-def move_right(array):
+
+def right(array):
     # If the 0 is in the right column return an error code
     x, y = find_zero(array)
-    if x == 3:
-        return 1
-
-    # If the 0 is not in the right column swap the 0 with the number to the right of it.
-    else:
+    if x != len(array) - 1:
         # Find the number to swap with
         number_to_swap = array[y][x+1]
         # Set the 0 to the new number
