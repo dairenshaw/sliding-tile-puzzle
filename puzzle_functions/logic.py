@@ -50,10 +50,12 @@ def find_zero(array):
 
 # Now define the functions which allow the 0 tile, representing the blank tile from the puzzle,
 # to move up, down, left and right.
-def up(array):
+def down(array):
     # If the 0 is not in the top row swap the 0 with the number above it.
     x, y = find_zero(array)
-    if y != 0:
+    if y == 0:
+        return 1
+    else:
         # Find the number to swap with
         number_to_swap = array[y-1][x]
         # Set the 0 to the new number
@@ -64,10 +66,12 @@ def up(array):
     return array
 
 
-def down(array):
+def up(array):
     # If the 0 is in the bottom row return an error code
     x, y = find_zero(array)
-    if y != len(array) - 1:
+    if y == len(array) - 1:
+        return 1
+    else:
         # Find the number to swap with
         number_to_swap = array[y+1][x]
         # Set the 0 to the new number
@@ -78,10 +82,12 @@ def down(array):
     return array
 
 
-def left(array):
+def right(array):
     # If the 0 is in the left column return an error code
     x, y = find_zero(array)
-    if x != 0:
+    if x == 0:
+        return 1
+    else:
         # Find the number to swap with
         number_to_swap = array[y][x-1]
         # Set the 0 to the new number
@@ -92,10 +98,12 @@ def left(array):
     return array
 
 
-def right(array):
+def left(array):
     # If the 0 is in the right column return an error code
     x, y = find_zero(array)
-    if x != len(array) - 1:
+    if x == len(array) - 1:
+        return 1
+    else:
         # Find the number to swap with
         number_to_swap = array[y][x+1]
         # Set the 0 to the new number
@@ -104,3 +112,7 @@ def right(array):
         array[y][x+1] = 0
 
     return array
+
+
+def print_history():
+    print()
